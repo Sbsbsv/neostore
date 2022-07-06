@@ -1,0 +1,212 @@
+{% extends 'basic.html' %} {% block title %}Index{% endblock title %}
+ {% block style %}
+ <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+ <style>
+    .container{
+        padding-top: 60px;
+       
+    }
+    *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --colorMain: #c0c0c0;
+  --brShadow: -6px 6px 15px rgba(0,0,0,0.5);
+  --tlShadow: 6px -6px 15px rgba(255,255,255,0.8);
+}
+.navbar{
+    top: 0;
+   display: none;
+}
+
+body {
+  
+  font-family: sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--colorMain);
+}
+
+.text {
+  color: var(--colorMain);
+  font-size: 8vmax;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-shadow: var(--brShadow), var(--tlShadow);
+  position: relative;
+}
+.text::before, .text::after {
+  position: relative;
+  background: var(--colorMain);
+  content: "";
+  border-radius: 10%;
+}
+.cname{
+    display: flex;
+    justify-content: center;
+    
+}
+.tlink{
+  color: #0f5132;
+  text-decoration: none;
+}
+.card{
+  box-shadow: 3px 3px 6px grey;
+}
+.card-title{
+    display: flex;
+    align-items: baseline;
+}.since{
+    font-size: 80%;
+    margin-left: 5px;
+    color: grey;
+}
+
+.social{
+  display: flex;
+  justify-content: center;
+  margin-top:50px ;
+  margin-bottom: 30px;
+}
+.frame{
+  background: #cccccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  width: 20rem;
+  position: relative;
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001,
+   inset 0px 0px 0px 0px #fff9,
+   inset 0px 0px 0px 0px #0001,
+   inset 0px 0px 0px 0px #fff9,        inset 0px 0px 0px 0px #0001;
+ transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
+   border-radius: 10px;
+}
+
+.btn2{
+  height: 35px;
+  width: 35px;
+  border-radius: 4px;
+  background: #e0e5ec;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+   -2px -2px 2px 0px #fff9,
+   -2px -2px 2px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001,
+   inset 0px 0px 0px 0px #fff9,
+   inset 0px 0px 0px 0px #0001,
+   inset 0px 0px 0px 0px #fff9,        inset 0px 0px 0px 0px #0001;
+ transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
+  font-size: 16px;
+  color: rgba(42, 52, 84, 1);
+  text-decoration: none;
+}
+.btn2:active{
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+}
+
+@media (max-width:1000px){
+    :root {
+  --colorMain: #c0c0c0;
+  --brShadow: -2px 2px 7px rgba(0,0,0,0.5);
+  --tlShadow: 3px -1px 7px rgba(255,255,255,0.8);
+}
+}
+ </style>
+ {% endblock style %}
+ {% block body %} 
+ <div class="container">
+    <main>
+        <div class="cname">
+        <p class="text">NEOSTORE</p></div>
+        
+
+        
+        <div class="aboutorder" id="aorder">
+          
+        </div>
+
+        <div class="about">
+            <div class="card">
+                <h5 class="card-header">About Us</h5>
+                <div class="card-body">
+                  <h5 class="card-title" >NEOSTORE <p class="since">Since 2020</p></h5>
+                  <p class="card-text">Neostore is an Indian e-commerce company, headquartered in Bathinda, and incorporated in Canada as a private limited company. The company initially focused on online book sales before expanding into other product categories such as consumer electronics, fashion, home essentials, groceries, and lifestyle products.</p>
+                  <a href="/" class="btn btn-primary">Go to Store</a>
+                </div>
+              </div>
+        </div>
+
+          <div class="social">
+          <div class ="frame">
+    <a href="https://m.facebook.com/101292362653516/" class="btn2">
+ <i class="fab fa-facebook-f" style="color: #3b5998;"></i>
+</a>
+<a href="https://www.youtube.com/channel/UCRpkdtto43kO2ZN_eo-Czkg" class="btn2">
+  <i class="fab fa-youtube" style="color:red;"></i>
+ </a>
+    
+    <a href="https://www.instagram.com/neostoresince20/" class="btn2">
+ <i class="fab fa-instagram" style="color: #e700f4;"></i>
+</a>
+    
+<a href="https://twitter.com/neostoresince20" class="btn2">
+  <i class="fab fa-twitter" style="color: #00acee;"></i>
+</a>
+    <a href="https://www.tumblr.com/blog/neostoresince20" class="btn2">
+ <i class="fab fa-tumblr" style="color:#ee4056;"></i>
+</a>
+    <a href="mailto: neostoresince20@gmail.com" class="btn2">
+ <i class="far fa-envelope"></i>
+</a>
+</div></div>
+
+    </main>
+ </div>
+
+
+ 
+ {% endblock body %}
+ {% block js %}
+ <script>
+
+console.log(localStorage.length)
+{% if thank %}
+//  alert(`<div class="alert alert-info" role="alert">
+//    Thanks....Order id is {{id}}......
+//  </div>`);
+ document.getElementById('aorder').innerHTML=`<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <h4 class="alert-heading">Order Sucessful</h4>
+            <p>Aww yeah, You order has been successfully placed.Your order id to <a class="tlink" href="/track"><strong>track</strong></a> the order is <strong>{{id}}</strong>.An email is already sent with order id to your email address.Thank you for chossing NEOSTORE.</p>
+            <hr>
+            <p class="mb-0">Whenever you need , we are always here to help you.</p>
+
+          </div>`;
+
+          localStorage.clear();
+ {% endif %}
+ </script>
+ 
+
+
+ {% endblock js %}

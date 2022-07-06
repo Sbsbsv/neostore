@@ -1,0 +1,71 @@
+{% extends 'basic.html' %}
+{% block title %}Contact{% endblock title %}
+{% block style %}
+<style>
+  .container{
+    padding-top: 100px;
+  }
+</style>
+{% endblock style %}
+{% load static%}
+
+{% block body %}
+
+<div class="container">
+  <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;" id="sucessalert">
+    <strong>Sucessful</strong> Your messege is sent successfully.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+    <form action="" method="post"  id="conform"> {% csrf_token %} 
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="Name" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
+      </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Mobile Number</label>
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+91 xxxxxxxxxx">
+      </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+      </div>
+   
+
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Enter Your Query/suggestion/complaint</label>
+        <textarea class="form-control" id="query" name="query" placeholder="How can we help you!" required rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+
+    </form>
+</div>
+{% endblock body %}
+{% block js %}
+<script>
+  document.getElementById('cartbutton').innerHTML='<img src="/static/cart.png" alt="" style="width: 30px;height:30px;">';
+  let firstP=document.getElementById('cartbutton');
+  firstP.setAttribute("data-bs-toggle","tooltip");
+  firstP.setAttribute("data-bs-placement","bottom");
+  firstP.setAttribute("title","Add Items");
+  $('#cartbutton').click(function (e) {
+    window.location.href = "/";
+  })
+  var alerted = localStorage.getItem('alerted') || '';
+   
+  $("#conform").submit(function(e) {
+   
+    localStorage.setItem('alerted','No');
+});
+
+{% if mission %}
+if (alerted != 'yes') {
+  document.getElementById('sucessalert').style.display='block';
+     localStorage.setItem('alerted','yes');
+    }
+
+
+{% endif  %}
+
+</script>
+{% endblock js %}

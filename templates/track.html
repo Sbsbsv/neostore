@@ -1,0 +1,188 @@
+{% extends 'basic.html' %}
+{% block title %} My Awesome Cart Tracker{% endblock %}
+{% block style %}
+<style>
+    .tom{
+        padding-top: 20px;
+        margin-left: 20px;
+        margin-right: 15px;
+    }
+    .lrm{
+        margin: 0 20px 0 20px;
+      
+    }
+    .bxs{
+        box-shadow: 1px 1px 6px #cbcbcb;
+    }
+    .tup{
+        display: flex;
+    }
+    .dubb{
+        margin-left: 20px;
+    }
+    .nb{
+        padding-bottom: 20px;
+    }
+    #citems{
+        padding-bottom: 30px;
+    }
+    .rime{
+        margin-right: 5px;
+        font-weight: bolder;
+        opacity: 60%;
+    }
+     .badge-pill{
+        text-shadow: none;
+     }
+    .my-4{
+        outline: none;
+    border: 0;
+    background-color: #ebecf0;
+    text-shadow: 1px 1px 0 #fff;
+    color: #61677c;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: -2px -2px 7px rgb(223, 223, 223), 5px 5px 8px #babeccc4;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+    }
+    .form-control{
+        box-shadow:inset 250px 250px 2300px white,1px 1px 6px #cbcbcb;
+    }
+    .form-control:focus,.input:focus,input:active,.form-control:active{
+    
+    border-color: #c3c3c3;
+    box-shadow:inset 250px 250px 2300px white,1px 1px 6px #aaaaaa;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container pt-5" >
+    <div class="col my-4">
+        <h2 class="tom"> Enter Order Id and Email address to track Order </h2>
+
+           <form method="post" action="/track" id="trackerForm">{% csrf_token %}
+            
+            <div class="form-row nb">
+               
+                <div class="form-group lrm col-md-6">
+                    <label for="inputname">Order Id</label>
+                    <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Orer Id" required>
+                </div>
+                <div class="form-group lrm col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+           
+            
+                 <button type="submit" class="btn dubb btn-success mt-2">Track Order</button>
+            </div>
+
+      
+    </div>
+    <div class="col my-4">
+        <h2 class="tom" id="yost" style="display: none;">Order Status :</h2>
+        <div class="my-3">
+            <ul class="list-group" id="items">
+            </ul>
+        </div>
+        <h2 class="tom" id="yosd" style="display: none;">Order Details :</h2>
+
+        <div class="my-3">
+            <ul class="list-group" id="citems">
+            </ul>
+        </div>
+       
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block js %}
+<script>
+$('#trackerForm').submit(function(event) {
+    $('#items').empty();
+    $('#citems').empty();
+    var formData = {
+        'orderId': $('input[name=orderId]').val(),
+        'email': $('input[name=email]').val(),
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+            type: 'POST',
+            url: '/track/',
+            data: formData,
+            encode: true
+        })
+        .done(function(data) {
+            // console.log(data)
+            data=JSON.parse(data)
+            updates =data[0] ;
+            if(updates==null){
+                console.log("no0")
+                document.getElementById('yosd').style.display='none';
+                mystr = `<li class="lrm bxs list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                $('#items').append(mystr);
+            }
+            else if (updates.length > 0 & updates != {}) {
+                for (i = 0; i < updates.length; i++) {
+                    let text = updates[i]['text'];
+                    let time = updates[i]['time'];
+                    // time = ((time.toString().split(' ')).slice(0, 5)).join(' ');
+                    date=time.toString().slice(0,10);
+                    rime=time.toString().slice(11,16);
+                    
+                    document.getElementById('yost').style.display='block';
+                    document.getElementById('yosd').style.display='block';
+                    mystr = `<li class="lrm bxs list-group-item d-flex justify-content-between align-items-center">${i+1}. 
+                    ${text}   <div class="tup"> <span class="rime">${rime}</span>
+                    <span class="badge text-bg-success badge-pill">${date}</span></div>
+                </li>`
+                    $('#items').append(mystr);
+                }
+            } else {
+                document.getElementById('yosd').style.display='none';
+                mystr = `<li class="lrm bxs list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                $('#items').append(mystr);
+            }
+          icart=JSON.parse(data[1]);
+          var j=1;
+          for(item in icart){
+
+            let name=icart[item][1];
+            let qty=icart[item][0];
+            if(qty==0)
+            continue;
+            mystr = `<li class="lrm bxs list-group-item d-flex justify-content-between align-items-center"> 
+                    ${name}   <div class="tup"> <span class="rime">${qty}</span>
+                   
+                </li>`
+                $('#citems').append(mystr);  
+                j=j+1;
+          }
+
+
+        });
+    event.preventDefault();
+});
+document.getElementById('cartbutton').innerHTML='<img src="/static/cart.png" alt="" style="width: 30px;height:30px;">';
+let firstP=document.getElementById('cartbutton');
+firstP.setAttribute("data-bs-toggle","tooltip");
+firstP.setAttribute("data-bs-placement","bottom");
+firstP.setAttribute("title","Add Items");
+$('#cartbutton').click(function (e) {
+    window.location.href = "/";
+  })
+</script>
+{% endblock %}
+
+

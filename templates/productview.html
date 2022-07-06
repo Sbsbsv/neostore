@@ -1,0 +1,582 @@
+{% extends 'basic.html' %}
+{% block title %} {{product.product_name}} {% endblock title %}
+{% block style %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+<style>
+
+  #atc{
+    box-shadow: 2px 2px 5px rgb(182, 182, 182);
+  
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgb(3,61,128);
+  
+  }
+  #atc:hover{
+    box-shadow: inset 3px 2px 4px rgb(3, 61, 128);
+  }
+.cart{
+  outline: none;
+  border: none;
+  background-color: white;
+}
+
+    .servicetext{
+font-size: 90%;
+color: grey;
+    }
+    .chotti{
+        width: 20px;
+    }
+    .pprice{
+        opacity: 0.7;
+    }
+    .pdesc{
+        font-family: 'Inter', sans-serif;
+    }
+    .rupee{
+        margin: 0 5px 0 20px;
+    }
+    .verified{
+        margin-top: -15px;
+        width: 150px;
+    }
+    .container{
+        padding-top: 75px;
+        margin-left: 20px;
+        display: flex;
+    }
+ 
+
+.pimage{
+    width: 40%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    
+    /* width: 520px;
+    height: 520px; */
+}
+.pdetails{
+    
+  width: 50%;  
+  margin: 20px;
+ 
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+.pphoto{
+   
+    /* width: 520px;
+    height: 520px; */
+    width: 100%;
+    height: 100%;
+   display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    
+   
+ }
+
+ .carousel-item{
+  width:30rem;
+  height:34rem;
+  float: none;
+transition: none;
+ }
+ .active{
+
+float: none;
+ }
+
+.ppphoto{
+   outline: none;
+   border: 0;
+   /* width:100%%; */
+   
+   
+  max-width: 520px;
+  max-height: 520px;
+  /* border: 1px solid rgb(99, 99, 99); */
+    border-radius: 20px;
+   
+    /* margin: 10px 0 10px 60px ; */
+}
+
+.mmval{
+  margin: 0 5px 0 5px;
+  font-weight: bold;
+  color: #5c5c5c;
+}
+.mm{
+  outline: none;
+    border: 0;
+    background-color: #ebecf0;
+    text-shadow: 1px 1px 0 #fff;
+    color: #61677c;
+    font-weight: bold;
+    box-shadow: -5px -5px 20px #fff, 2px 2px 10px #a3a4a9;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+}
+.mm:hover{
+  outline: none;
+    border: 0;
+    background-color: #ebecf0;
+    text-shadow: 1px 1px 0 #fff;
+    color: #61677c;
+    font-weight: bold;
+   
+    box-shadow: -5px -5px 20px #fff, 2px 2px 10px #a3a4a9;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+
+}
+.plus:focus,.minus:focus{
+  outline: none;
+    border: 0;
+    background-color: #ebecf0;
+    text-shadow: 1px 1px 0 #fff;
+    color: #61677c;
+    font-weight: bold;
+   
+    box-shadow: -5px -5px 20px #fff, 2px 2px 10px #a3a4a9;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+}
+.plus:hover,.minus:hover{
+  box-shadow: inset 2px 2px 5px 1px #bdbdbd;
+  /* background-color: #ffffff; */
+
+
+}
+.atcart{
+    margin-top: 20px;
+
+}
+.jpr{
+  font-size: 110%;
+   font-weight: 700;
+   color: #555555eb;
+ }
+ .ocdiv1{
+   display: flex;
+ }
+ .ocdiv{
+   display: flex;
+ }
+ .ccbtns{
+  margin: 20px;
+  width: 90px;
+  box-shadow: 2px 2px 7px #5c5c5c;
+  border-radius: 20px;
+    color: #ffffff;
+    font-weight: bold;
+}
+ .dlttemp{
+  border: none;
+  outline: none;
+  background: none;
+ }
+ .cdb:hover{
+  box-shadow: 2px 2px 3px rgb(154, 154, 154),-1px -1px 3px rgb(154,154,154);
+  border-radius: 4px;
+}
+.cdb{
+  width: 23px;
+  height: 25px;
+  cursor: pointer;
+}
+.fd{
+  display: flex;
+  justify-content: space-between;
+}
+.ocbq{
+  color: gray;
+}
+.ocbodyitms{
+font-family: Josefin sans;
+font-weight: 700;
+}
+.ibut{
+  z-index: 1;
+}
+.ibutto{
+  width: 60px;
+  height: 60px;
+  margin-top: 13px;
+  outline: none;
+  border: none;
+  border-radius: 10%;
+  box-shadow: 1px 1px 3px grey;
+  z-index: 1;
+}
+.inppphoto{
+  
+  width: 95%;
+  max-height: 100%;
+}
+.ocdelete{
+  width: 27px;
+  height: 25px;
+ outline: none;
+ border: none;
+}
+.vv{
+  width: 10rem;
+  margin-top: 10px;
+
+}
+.citems{
+  width: 30rem;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 15px;
+}
+@media (max-width:1000px) {
+        .container{
+            flex-direction: column;
+            margin: 0;
+           
+        }
+        .ibutto{
+          width: 40px;
+          height: 40px;
+          margin-top: 10px;
+        }
+        
+        .pdetails{
+            margin-left: 20px;
+            width: 95%;
+        }
+        
+        .pphoto{
+            margin: auto;
+           max-width: 350px;
+            display: flex;
+            justify-content: 0;
+        }
+        .ppphoto{
+            margin: auto;
+            max-width: 320px;
+        }
+        
+    }
+</style> {% endblock style %}
+
+
+{% block body %}
+
+<!-- <img src="/media/{{product.image}}" width="300" height="300" alt="img not found">
+ <br> {{product.product_name}} <br>{{product.product_desc}} {{product.price}} <br>
+ <button class="btn btn-primary">Add to cart</button>
+ <button class="btn btn-primary">Buy now</button> -->
+
+ <div class="container">
+    <div class="imageside">
+    <div class="pimage">
+<div class="pphoto">
+  <div class="ibut">
+    <button class="ibutto" id="/media/{{product.image}}" onclick="showthisimg(this.id)">  
+      <img class="inppphoto" src="/media/{{product.image}}"  alt="img not found" id="/media/{{product.image}}" onclick="showthisimg(this.id)"> 
+    </button>
+
+    <button class="ibutto" id="/media/{{product.image2}}" onclick="showthisimg(this.id)">  <img id="/media/{{product.image2}}" class="inppphoto" src="/media/{{product.image2}}"  alt="img not found"> </button>
+    
+    <button class="ibutto" id="/media/{{product.image3}}" onclick="showthisimg(this.id)">  <img id="/media/{{product.image3}}" class="inppphoto" src="/media/{{product.image3}}"  alt="img not found"> </button>
+    <button class="ibutto" id="/media/{{product.image4}}" onclick="showthisimg(this.id)">  <img id="/media/{{product.image4}}" class="inppphoto" src="/media/{{product.image4}}"  alt="img not found"> </button>
+  </div>
+  
+  <div class="citems">
+   <img class="ppphoto" src="/media/{{product.image}}"  alt="img not found" id="showingimg"></div>
+ 
+  
+</div>
+
+
+<!-- <button class="btn btn-lg btn-primary atcart">Add to cart</button> -->
+<span id="divpr{{product.id}}" class="divpr"></span>
+           
+<div id="davpr{{product.id}}" class="divpr davpr">
+
+
+  <button id="pr{{product.id}}" class="vv cart">
+    <a href="#" id="atc" class="btn btn-primary btn-lg" onclick="return false;">Add to Cart</a>
+  </button></div>
+
+
+
+  <div id="dovpr{{product.id}}" class="divpr dovpr" style="display: none;">
+    <button id="minuspr{{product.id}}" class="mm minus btn btn-success btn-lg">- </button>
+     <span class="mmval" id="valpr{{product.id}}"></span>
+    <button id="pluspr{{product.id}}" class="mm plus btn btn-success btn-lg">+ </button>
+    
+ 
+   </div>
+    </div>
+    </div>
+
+    <div class="pdetails">
+        <p id="poname" style="display: none;" >{{product.product_name}}</p>
+<h1 style="font-weight: bold;">
+    {{product.product_name}}
+   
+<div class="prcheck">
+    <img src="/static/Untitled-1.png" alt="" class="verified">
+</div>
+</h1>
+<hr>
+<h3 style="display: flex;"><p class="pprice">Price :</p><p class="rupee">	&#8377</p> <p id="pricepr{{product.id}}">{{product.price}}</p></h3>
+<p class="pdesc">
+    {{product.product_desc}}
+</p>
+<hr>
+<div class="services">
+    <p class="servicetext">
+        <img src="/static/warranty.png" alt="" class="chotti">
+        {{product.warrenty}} Warranty 
+    </p>
+    <p class="servicetext">
+        <img src="/static/cash.png" alt="" class="chotti">
+        Cash on delivery available
+    </p>
+    <p class="servicetext">
+        <img src="/static/noreturn.png" alt="" class="chotti">
+       {{product.rex}} return or exchange avialable
+    </p>
+  
+</div>
+    </div>
+
+    <div class="incart">
+   
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body" id="ocbody">
+            <p class="occe" id="occee">
+              Cart empty
+            </p>
+            
+          </div>
+          <div class="buutons">
+            <button class="ccbtns btn btn-primary" disabled="disabled" id="clearcart">Clear</button>
+            <button class="ccbtns btn btn-primary" disabled="disabled" id="checkout" onclick="location.href = '/Checkout';">Checkout</button>
+          </div>
+        </div>
+          </div>
+ </div>
+
+{% endblock body %}
+{% block js %}
+<script>
+     if (localStorage.getItem("cart") == null) {
+    var cart = {};
+  } else {
+    cart = JSON.parse(localStorage.getItem("cart"));
+    // document.getElementById("cb").innerHTML = Object.keys(cart).length;
+    // updatecart(cart);
+  }
+
+  $(".cart").click(function () {
+    
+
+    var idstr = this.id.toString();
+    console.log(idstr)
+
+    if (cart[idstr] != undefined) {
+      qty = cart[idstr][0] + 1;
+      cart[idstr][0]=qty;
+      
+      // cart[idstr] = [qty,naam,price]; 
+    } else { 
+      qty=1;
+     
+      naam=document.getElementById('poname').innerHTML;
+      price=document.getElementById('price'+idstr).innerHTML;
+      cart[idstr] = [qty,naam,price];
+    }
+    
+    updatecart(cart, this.id);
+  });
+
+  function updatecart(cart, idd) {
+    var sum=0;
+    for(var item in cart)
+    sum=sum+cart[item][0];
+    document.getElementById("val"+idd).innerHTML=cart[idd][0];
+    document.getElementById("dov"+idd).style.display='block';
+     document.getElementById("dav"+idd).style.display='none';
+    //  document.querySelectorAll("#dov"+idd).forEach(a=>a.style.display = "block");
+    // document.querySelectorAll("#dav"+idd).forEach(a=>a.style.display = "none");
+
+localStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("cartbuttontext").innerHTML = sum;
+    if (sum==0) {
+      document.getElementById("cartbuttontext").innerHTML="";
+
+    }
+  
+  }
+  function supdatecart(cart, idd) {
+    var sum=0;
+    for(var item in cart)
+    sum=sum+cart[item][0];
+    // document.getElementById("val"+idd).innerHTML=cart[idd][0];
+    // document.getElementById("dov"+idd).style.display='block';
+    //  document.getElementById("dav"+idd).style.display='none';
+    //  document.querySelectorAll("#dov"+idd).forEach(a=>a.style.display = "block");
+    // document.querySelectorAll("#dav"+idd).forEach(a=>a.style.display = "none");
+
+localStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("cartbuttontext").innerHTML = sum;
+    if (sum==0) {
+      document.getElementById("cartbuttontext").innerHTML="";
+
+    }
+  
+  }
+  document.getElementById("clearcart").addEventListener("click",function(){
+    
+    localStorage.clear();
+   
+    cart={};
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
+    document.getElementById("ocbody").innerHTML="<p >Cart empty</p>";
+    
+    document.getElementById("cartbuttontext").innerHTML="";
+    $('.dovpr').css("display", "none");
+    $('.davpr').css("display", "block");
+    document.getElementById('clearcart').disabled=true;
+document.getElementById('checkout').disabled=true;
+  });
+  
+  document.getElementById("cartbutton").addEventListener("click", function(){
+    
+    var summ=0;
+    for(var item in cart)
+    summ=summ+cart[item][0];
+if(summ==0){
+document.getElementById('clearcart').disabled=true;
+document.getElementById('checkout').disabled=true;
+}else{
+  document.getElementById('clearcart').disabled=false;
+document.getElementById('checkout').disabled=false;
+
+/* var popstr="";
+// console.log(popstr);
+var i=1;
+for (var item in cart){
+  if(cart[item][0]==0)
+  continue;
+  console.log(cart[item][1]);
+  popstr=popstr+"<b>"+i+"</b>. ";
+  popstr=popstr+cart[item][1].slice(0,20)+"...  x <b>"+cart[item][0]+"</b> <br>";
+  i=i+1;
+
+}
+console.log(popstr);
+document.getElementById("ocbody").innerHTML=popstr;
+
+}
+}); */
+var popstr="";
+// console.log(popstr);
+var i=1;
+for (var item in cart){
+  if(cart[item][0]==0)
+  continue;
+  popstr=popstr+'<div class="fd" id="g'+item+'" ><div class="ocdiv1"> <b>'+""+'</b><div class="ocdiv"> ';
+  popstr=popstr+'<p class="ocbodyitems">' +cart[item][1].slice(0,20)+ '</p><p class="ocbq">'+'...  x <b>'+cart[item][0]+' </p></b> </div></div> '+
+  '<button id="dlt'+item+'" class="dlttemp" ><img src="/static/trash1.png" alt="Ni" id="dltimg'+item+'" class="cdb" onclick="deleteitemc(this.id)"></button></div></div>';
+
+  i=i+1;
+
+}
+// console.log(popstr);
+document.getElementById("ocbody").innerHTML=popstr;
+
+
+}
+});
+
+  $('.divpr').on("click", "button.minus", function() {
+    a=this.id.slice(5, );
+   
+   cart[a][0]=cart[a][0]-1;
+  //  console.log(cart[a]);
+   document.getElementById("val"+a).innerHTML=cart[a][0];
+   updatecart(cart,a);
+  if(cart[a][0]<1){
+    
+ 
+
+    
+    document.getElementById("dov"+a).style.display='none';
+    document.getElementById("dav"+a).style.display='block';
+  }
+});
+  $('.divpr').on("click", "button.plus", function() {
+    a=this.id.slice(4, );
+   
+   cart[a][0]=cart[a][0]+1;
+   document.getElementById("val"+a).innerHTML=cart[a][0];
+   updatecart(cart,a);
+
+});
+function deleteitemc(bid){
+ 
+  a=bid.slice(6,)
+  b=a.slice(2,)
+  console.log(b)
+
+  cart[a][0]=0;
+  supdatecart(cart,a);
+  if(b=={{product.id}}){
+    console.log('yrd')
+    document.getElementById("dov"+a).style.display='none';
+    document.getElementById("dav"+a).style.display='block';
+  }
+
+
+  // localStorage.removeItem("cart",delete cart.a)
+document.getElementById('g'+a).remove();
+
+if(document.getElementById('cartbuttontext').innerHTML==""){
+  document.getElementById('ocbody').innerHTML=`<p class="occe" id="occee">
+      Cart empty
+    </p>`
+}
+
+}
+window.onload = function() {
+ sum=0;
+  console.log('onload')
+  for(var item in cart)
+    sum=sum+cart[item][0];
+    document.getElementById("cartbuttontext").innerHTML = sum;
+    if (sum==0) {
+      document.getElementById("cartbuttontext").innerHTML="";
+
+    }
+}
+function showthisimg(id){
+  document.getElementById('showingimg').src=id;
+}
+function ashowthisimg(id){
+  // document.getElementById('showingimg').src=id;
+  console.log(id)
+}
+</script>
+{% endblock js %}

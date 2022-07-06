@@ -1,0 +1,221 @@
+{% extends 'basic.html' %} {% block title %}Search{% endblock title %}
+ {% block style %}
+ <style>
+   .container{
+     padding-top: 70px;
+   }
+   .occe{
+    font-weight: 70%;
+   }
+ </style>
+ {% endblock style %} {% load static%} {% block body %}
+ 
+<div class="container">
+  <!-- <button onclick="location.href = '/';">Go</button>
+  <button id="cb"></button> -->
+  <div class="items">
+    {% for i in products %}
+
+    <div class="card" style="width: 18rem">
+      <a href="/products/{{i.id}}">
+        <img src=" /media/{{i.image}}" class="card-img-top" alt="img not found"
+      /></a>
+      <div class="card-body">
+        <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+        <h5 class="card-title" id="pricepr{{i.id}}">{{i.price}}</h5>
+        <p class="card-text">{{i.product_desc}}</p>
+        <span id="divpr{{i.id}}" class="divpr"></span>
+           
+        <div id="davpr{{i.id}}" class="divpr davpr">
+
+        
+          <button id="pr{{i.id}}" class="cart">
+            <a href="#" id="atc" class="btn btn-primary" onclick="return false;">Add to Cart</a>
+          </button></div>
+        
+        
+
+          <div id="dovpr{{i.id}}" class="divpr dovpr" style="display: none;">
+            <button id="minuspr{{i.id}}" class=" minus btn btn-success">- </button>
+             <span id="valpr{{i.id}}"></span>
+            <button id="pluspr{{i.id}}" class=" plus btn btn-success">+ </button>
+              
+           </div>
+
+          
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="sorry" >
+    <div class="col my-4">
+        
+        <div class="my-4">
+            <ul class="list-group" id="items">
+                <p id="srry"></p>
+            </ul>
+        </div>
+        
+       
+    </div>
+  </div>
+
+
+  <div class="incart">
+   
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="ocbody">
+    <p class="occe" id="occee">
+      Cart empty
+    </p>
+    
+  </div>
+  <div class="buutons">
+    <button disabled="disabled" id="clearcart">Clear</button>
+    <button disabled="disabled" id="checkout" onclick="location.href = '/Checkout';">Checkout</button>
+  </div>
+</div>
+  </div>
+
+</div>
+{% endblock body %} {% block js %}
+<script>
+    let nofinds={{no}}
+    console.log(nofinds)
+    if(nofinds==0){
+        document.getElementById('srry').innerHTML="Sorry! No items found.";
+    }else{
+        document.getElementById('srry').innerHTML="";
+    }
+
+  if (localStorage.getItem("cart") == null) {
+    var cart = {};
+  } else {
+    cart = JSON.parse(localStorage.getItem("cart"));
+    // document.getElementById("cb").innerHTML = Object.keys(cart).length;
+    // updatecart(cart);
+  }
+
+  $(".cart").click(function () {
+    
+
+    var idstr = this.id.toString();
+    console.log(idstr)
+
+    if (cart[idstr] != undefined) {
+      qty = cart[idstr][0] + 1;
+      cart[idstr][0]=qty;
+      
+      // cart[idstr] = [qty,naam,price]; 
+    } else { 
+      qty=1;
+     
+      naam=document.getElementById('name'+idstr).innerHTML;
+      price=document.getElementById('price'+idstr).innerHTML;
+      cart[idstr] = [qty,naam,price];
+    }
+
+    
+    updatecart(cart, this.id);
+  });
+
+//bill 
+  
+
+  function updatecart(cart, idd) {
+    var sum=0;
+    for(var item in cart)
+    sum=sum+cart[item][0];
+    document.getElementById("val"+idd).innerHTML=cart[idd][0];
+    document.getElementById("dov"+idd).style.display='block';
+    document.getElementById("dav"+idd).style.display='none';
+localStorage.setItem("cart", JSON.stringify(cart));
+    document.getElementById("cartbuttontext").innerHTML = sum;
+    if (sum==0) {
+      document.getElementById("cartbuttontext").innerHTML="";
+
+    }
+  
+  }
+
+  // clear cartbutton
+  document.getElementById("clearcart").addEventListener("click",function(){
+    
+    localStorage.clear();
+   
+    cart={};
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
+    document.getElementById("ocbody").innerHTML="<p >Cart empty</p>";
+    
+    document.getElementById("cartbuttontext").innerHTML="";
+    $('.dovpr').css("display", "none");
+    $('.davpr').css("display", "block");
+    document.getElementById('clearcart').disabled=true;
+document.getElementById('checkout').disabled=true;
+  })
+
+  document.getElementById("cartbutton").addEventListener("click", function(){
+    console.log("cinc")
+    var summ=0;
+    for(var item in cart)
+    summ=summ+cart[item][0];
+if(summ==0){
+document.getElementById('clearcart').disabled=true;
+document.getElementById('checkout').disabled=true;
+}else{
+  document.getElementById('clearcart').disabled=false;
+document.getElementById('checkout').disabled=false;
+
+
+var popstr="";
+// console.log(popstr);
+var i=1;
+for (var item in cart){
+  if(cart[item][0]==0)
+  continue;
+  popstr=popstr+"<b>"+i+"</b>. ";
+  popstr=popstr+document.getElementById('name'+item).innerHTML.slice(0,20)+"...  x <b>"+cart[item][0]+"</b> <br>";
+  i=i+1;
+
+}
+console.log(popstr);
+document.getElementById("ocbody").innerHTML=popstr;
+
+}
+});
+
+  $('.divpr').on("click", "button.minus", function() {
+    a=this.id.slice(5, );
+   
+   cart[a][0]=cart[a][0]-1;
+  //  console.log(cart[a]);
+   document.getElementById("val"+a).innerHTML=cart[a][0];
+   updatecart(cart,a);
+  if(cart[a][0]<1){
+    
+ 
+    document.getElementById("dov"+a).style.display='none';
+    document.getElementById("dav"+a).style.display='block';
+  }
+});
+  $('.divpr').on("click", "button.plus", function() {
+    a=this.id.slice(4, );
+   
+   cart[a][0]=cart[a][0]+1;
+   document.getElementById("val"+a).innerHTML=cart[a][0];
+   updatecart(cart,a);
+
+});
+
+
+
+
+</script>
+{% endblock js %}
