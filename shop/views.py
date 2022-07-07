@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 from django.conf import settings
-from turtle import update
+
 from unicodedata import category, name
 from urllib import response
 from datetime import datetime
